@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON BREW - Kopi Retro Futuristik</title>
+    <style>
+        :root {
+            --purple: #1a0033;
+            --cyan: #00f0ff;
+            --pink: #ff00aa;
+            --gold: #ffd700;
+            --dark: #0a001a;
+            --light: #e0e0ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+        }
+
+        /* Navbar */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 0, 26, 0.95);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--cyan);
+            z-index: 100;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--cyan);
+            text-shadow: 0 0 15px var(--cyan);
+        }
+
+        .logo span {
+            color: var(--pink);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+            text-shadow: 0 0 10px var(--cyan);
+        }
+
+        .cart-btn {
+            background: var(--cyan);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--cyan);
+            transition: 0.3s;
+        }
+
+        .cart-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, rgba(26, 0, 51, 0.9), rgba(10, 0, 26, 0.95));
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: var(--cyan);
+            text-shadow: 0 0 30px var(--cyan);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--gold);
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            border: 2px solid var(--cyan);
+            color: var(--cyan);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: var(--cyan);
+            color: var(--dark);
+            box-shadow: 0 0 30px var(--cyan);
+        }
+
+        .btn-pink {
+            border-color: var(--pink);
+            color: var(--pink);
+        }
+
+        .btn-pink:hover {
+            background: var(--pink);
+            box-shadow: 0 0 30px var(--pink);
+        }
+
+        /* Menu */
+        .section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--cyan);
+            text-shadow: 0 0 20px var(--cyan);
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--light);
+            margin-bottom: 40px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            background: rgba(26, 0, 51, 0.8);
+            border: 1px solid var(--cyan);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+        }
+
+        .menu-img {
+            height: 160px;
+            background: linear-gradient(45deg, var(--purple), var(--cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .menu-body {
+            padding: 20px;
+        }
+
+        .menu-body h3 {
+            color: var(--cyan);
+            margin-bottom: 8px;
+        }
+
+        .menu-body .desc {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .menu-body .price {
+            color: var(--gold);
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--gold);
+        }
+
+        .menu-body .stars {
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .add-cart {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, var(--cyan), var(--pink));
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .add-cart:hover {
+            box-shadow: 0 0 20px var(--cyan);
+        }
+
+        /* Random Brew */
+        .brew-box {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(26, 0, 51, 0.8);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .slot-display {
+            font-size: 80px;
+            padding: 20px;
+            background: #000;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid var(--gold);
+        }
+
+        .brew-result {
+            font-size: 28px;
+            color: var(--cyan);
+            margin: 20px 0;
+            text-shadow: 0 0 20px var(--cyan);
+        }
+
+        .brew-price {
+            color: var(--gold);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .brew-counter {
+            margin: 15px 0;
+            color: var(--light);
+        }
+
+        .brew-btn {
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--pink), var(--gold));
+            border: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .brew-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 0, 170, 0.5);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--gold);
+            color: var(--dark);
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Reservation */
+        .era-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .era-card {
+            background: rgba(26, 0, 51, 0.8);
+            border: 2px solid var(--cyan);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            width: 220px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .era-card:hover, .era-card.selected {
+            border-color: var(--gold);
+            box-shadow: 0 0 30px var(--gold);
+        }
+
+        .era-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .era-card h3 {
+            color: var(--cyan);
+            margin-bottom: 8px;
+        }
+
+        .reservation-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(26, 0, 51, 0.8);
+            border: 2px solid var(--cyan);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .reservation-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--cyan);
+            border-radius: 5px;
+            color: white;
+        }
+
+        .reservation-form label {
+            color: var(--cyan);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .code-display {
+            font-size: 24px;
+            color: var(--gold);
+            background: #000;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* Cart Sidebar */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 200;
+            display: none;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            max-width: 100%;
+            height: 100%;
+            background: var(--purple);
+            border-left: 2px solid var(--cyan);
+            z-index: 201;
+            transition: right 0.3s;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-sidebar h2 {
+            color: var(--cyan);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .cart-total {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--gold);
+            text-align: right;
+            margin: 20px 0;
+        }
+
+        .cart-form input, .cart-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--cyan);
+            border-radius: 5px;
+            color: white;
+        }
+
+        .close-cart {
+            float: right;
+            background: none;
+            border: none;
+            color: var(--cyan);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 300;
+        }
+
+        .modal-content {
+            background: var(--purple);
+            border: 2px solid var(--cyan);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 0 40px var(--cyan);
+        }
+
+        .modal-content h2 {
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            margin-bottom: 10px;
+        }
+
+        .modal-content .order-id {
+            color: var(--cyan);
+            font-size: 20px;
+        }
+
+        .modal-content .total {
+            color: var(--gold);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 2px solid var(--cyan);
+            margin-top: 50px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            .nav-links {
+                gap: 10px;
+                font-size: 14px;
+            }
+            .era-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">NEON<span>BREW</span></div>
+        <ul class="nav-links">
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#random">Random Brew</a></li>
+            <li><a href="#reservasi">Reservasi</a></li>
+        </ul>
+        <button class="cart-btn" onclick="toggleCart()">🛒 Keranjang (<span id="cartCount">0</span>)</button>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>Where Past Meets Future in Every Cup</h1>
+        <p>☕ Kopi Retro Futuristik - Rasakan sensasi unik setiap tegukan!</p>
+        <a href="#menu" class="btn">Lihat Menu</a>
+        <a href="#random" class="btn btn-pink">Random Brew 🎲</a>
+    </div>
+
+    <!-- Menu Section -->
+    <div class="section" id="menu">
+        <h2 class="section-title">☕ Menu Kami</h2>
+        <p class="section-subtitle">Pilih minuman favoritmu!</p>
+        <div class="menu-grid" id="menuGrid"></div>
+    </div>
+
+    <!-- Random Brew -->
+    <div class="section" id="random">
+        <h2 class="section-title">🎰 Random Brew Challenge</h2>
+        <p class="section-subtitle">Berani coba keberuntunganmu?</p>
+        <div class="brew-box">
+            <div class="slot-display" id="slotDisplay">❓</div>
+            <div class="brew-result" id="brewName">???</div>
+            <div class="brew-price" id="brewPrice"></div>
+            <p class="brew-counter">Brew ke-<span id="brewCount">0</span>/10</p>
+            <button class="brew-btn" onclick="startRandomBrew()">🎲 Mulai Random Brew!</button>
+            <div id="brewBadge"></div>
+        </div>
+    </div>
+
+    <!-- Reservation -->
+    <div class="section" id="reservasi">
+        <h2 class="section-title">⏰ Reservasi Meja</h2>
+        <p class="section-subtitle">Pilih era favoritmu!</p>
+        <div class="era-cards" id="eraCards">
+            <div class="era-card selected" onclick="selectEra('80s', this)" data-era="80s">
+                <div class="era-icon">📼</div>
+                <h3>80's Retro</h3>
+                <p>Nuansa klasik synthwave</p>
+            </div>
+            <div class="era-card" onclick="selectEra('modern', this)" data-era="modern">
+                <div class="era-icon">💻</div>
+                <h3>Modern</h3>
+                <p>Desain kontemporer</p>
+            </div>
+            <div class="era-card" onclick="selectEra('future', this)" data-era="future">
+                <div class="era-icon">🚀</div>
+                <h3>Futuristic 2080</h3>
+                <p>Pengalaman masa depan</p>
+            </div>
+        </div>
+        <form class="reservation-form" onsubmit="submitReservation(event)">
+            <label>Nama</label>
+            <input type="text" id="resName" required>
+            <label>Tanggal</label>
+            <input type="date" id="resDate" required>
+            <label>Jam</label>
+            <input type="time" id="resTime" required>
+            <label>Jumlah Tamu</label>
+            <input type="number" id="resGuests" min="1" max="10" required>
+            <input type="hidden" id="selectedEra" value="80s">
+            <button type="submit" class="btn">Reservasi Sekarang</button>
+        </form>
+        <div class="code-display" id="reservationCode"></div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <button class="close-cart" onclick="toggleCart()">✕</button>
+        <h2>🛒 Pesanan Anda</h2>
+        <div id="cartItems"></div>
+        <div class="cart-total">Total: Rp <span id="cartTotal">0</span></div>
+        <form class="cart-form" onsubmit="checkout(event)">
+            <input type="text" id="custName" placeholder="Nama Anda" required>
+            <input type="text" id="tableNum" placeholder="Nomor Meja" required>
+            <textarea id="orderNote" placeholder="Catatan..."></textarea>
+            <button type="submit" class="btn">Proses Pesanan</button>
+        </form>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <h2>🎉 Pesanan Berhasil!</h2>
+            <p>ID Pesanan: <span class="order-id" id="orderIdDisplay"></span></p>
+            <p class="total">Total: Rp <span id="modalTotal"></span></p>
+            <p>Estimasi: 15-20 menit</p>
+            <button class="btn" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>📍 Jl. Futuristic No. 8080, Cyber City | 📞 (021) 1234-5678</p>
+        <p>NEON<span style="color:var(--pink)">BREW</span> © 2026 - Where Past Meets Future in Every Cup</p>
+    </div>
+
+    <script>
+        // Data Menu
+        const menuData = [
+            { id: 1, name: "Cyber Espresso", category: "signature", desc: "Espresso kuat dengan sentuhan digital", price: 28000, stars: 5, icon: "⚡" },
+            { id: 2, name: "Neon Latte", category: "signature", desc: "Latte dengan efek neon glow", price: 32000, stars: 5, icon: "💜" },
+            { id: 3, name: "Retro Cappuccino", category: "signature", desc: "Cappuccino klasik ala 80-an", price: 30000, stars: 4, icon: "📼" },
+            { id: 4, name: "Hologram Chocolate", category: "non-coffee", desc: "Coklat dengan efek hologram", price: 25000, stars: 4, icon: "🍫" },
+            { id: 5, name: "Future Matcha", category: "non-coffee", desc: "Matcha dari masa depan", price: 27000, stars: 5, icon: "🍵" },
+            { id: 6, name: "Synthwave Smoothie", category: "non-coffee", desc: "Smoothie buah dengan vibe retro", price: 30000, stars: 4, icon: "🥤" },
+            { id: 7, name: "Pixel Croissant", category: "pastry", desc: "Croissant dengan pola pixel", price: 22000, stars: 5, icon: "🥐" },
+            { id: 8, name: "Glitch Cake", category: "pastry", desc: "Kue dengan efek glitch art", price: 35000, stars: 5, icon: "🍰" },
+            { id: 9, name: "Robot Waffle", category: "special", desc: "Waffle berbentuk robot", price: 40000, stars: 5, icon: "🤖" },
+            { id: 10, name: "Time Travel Pizza", category: "special", desc: "Pizza dari berbagai era", price: 45000, stars: 4, icon: "🍕" },
+        ];
+
+        const randomBrews = [
+            { name: "Galaxy Latte", price: 20000, icon: "🌌" },
+            { name: "Rainbow Brew", price: 22000, icon: "🌈" },
+            { name: "Mystery Mocha", price: 18000, icon: "🎭" },
+            { name: "Lava Coffee", price: 25000, icon: "🌋" },
+            { name: "Arctic Espresso", price: 21000, icon: "❄️" },
+        ];
+
+        // State
+        let cart = [];
+        let brewCount = parseInt(localStorage.getItem('brewCount') || '0');
+        let selectedEra = '80s';
+
+        // Render Menu
+        function renderMenu() {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = menuData.map(item => `
+                <div class="menu-card">
+                    <div class="menu-img">${item.icon}</div>
+                    <div class="menu-body">
+                        <h3>${item.name}</h3>
+                        <div class="stars">${'⭐'.repeat(item.stars)}</div>
+                        <p class="desc">${item.desc}</p>
+                        <p class="price">Rp ${item.price.toLocaleString()}</p>
+                        <button class="add-cart" onclick="addToCart(${item.id})">+ Tambah ke Pesanan</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Cart Functions
+        function addToCart(id) {
+            const item = menuData.find(m => m.id === id);
+            const existing = cart.find(c => c.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...item, qty: 1 });
+            }
+            updateCart();
+            // Animasi
+            const btn = event.target;
+            btn.textContent = '✓ Ditambahkan!';
+            btn.style.background = '#00ff88';
+            setTimeout(() => {
+                btn.textContent = '+ Tambah ke Pesanan';
+                btn.style.background = 'linear-gradient(45deg, var(--cyan), var(--pink))';
+            }, 1000);
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align:center;color:#666;">Keranjang kosong</p>';
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong>
+                            <p style="color:var(--gold);">Rp ${item.price.toLocaleString()}</p>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <button onclick="changeQty(${item.id}, -1)" style="background:var(--cyan);border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">-</button>
+                            <span>${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" style="background:var(--cyan);border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            cartTotal.textContent = total.toLocaleString();
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(c => c.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(c => c.id !== id);
+                }
+                updateCart();
+            }
+        }
+
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+            document.getElementById('cartOverlay').style.display =
+                document.getElementById('cartSidebar').classList.contains('open') ? 'block' : 'none';
+        }
+
+        function checkout(e) {
+            e.preventDefault();
+            const name = document.getElementById('custName').value;
+            const table = document.getElementById('tableNum').value;
+            if (!name || !table || cart.length === 0) {
+                alert('Mohon isi data dan tambahkan pesanan!');
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            const orderId = 'NB-' + Date.now().toString(36).toUpperCase();
+            document.getElementById('orderIdDisplay').textContent = orderId;
+            document.getElementById('modalTotal').textContent = total.toLocaleString();
+            document.getElementById('orderModal').style.display = 'flex';
+            cart = [];
+            updateCart();
+            toggleCart();
+            document.getElementById('cartForm').reset();
+        }
+
+        function closeModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        // Random Brew
+        function startRandomBrew() {
+            const slot = document.getElementById('slotDisplay');
+            const nameDisplay = document.getElementById('brewName');
+            const priceDisplay = document.getElementById('brewPrice');
+            const btn = document.querySelector('.brew-btn');
+
+            btn.disabled = true;
+            btn.textContent = '🎰 Memutar...';
+            slot.textContent = '🎰';
+
+            // Animasi slot
+            let spinCount = 0;
+            const spinInterval = setInterval(() => {
+                slot.textContent = ['🌌', '🌈', '🎭', '🌋', '❄️'][Math.floor(Math.random() * 5)];
+                spinCount++;
+                if (spinCount >= 10) {
+                    clearInterval(spinInterval);
+                    const brew = randomBrews[Math.floor(Math.random() * randomBrews.length)];
+                    slot.textContent = brew.icon;
+                    nameDisplay.textContent = brew.name;
+                    priceDisplay.textContent = `Rp ${brew.price.toLocaleString()}`;
+                    brewCount++;
+                    localStorage.setItem('brewCount', brewCount);
+                    document.getElementById('brewCount').textContent = brewCount;
+
+                    // Cek badge
+                    if (brewCount >= 10) {
+                        document.getElementById('brewBadge').innerHTML =
+                            '<span class="badge">🏆 Master Brewer!</span>';
+                        if (brewCount % 10 === 0) {
+                            alert('🎉 Selamat! Anda mendapat 1 GRATIS Random Brew!');
+                        }
+                    }
+
+                    btn.disabled = false;
+                    btn.textContent = '🎲 Mulai Random Brew!';
+                }
+            }, 150);
+        }
+
+        // Reservation
+        function selectEra(era, el) {
+            selectedEra = era;
+            document.getElementById('selectedEra').value = era;
+            document.querySelectorAll('.era-card').forEach(card => card.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function submitReservation(e) {
+            e.preventDefault();
+            const name = document.getElementById('resName').value;
+            const era = document.getElementById('selectedEra').value;
+            const code = `NB-${era.toUpperCase()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+            const codeDisplay = document.getElementById('reservationCode');
+            codeDisplay.textContent = `🎫 Kode Reservasi: ${code}`;
+            codeDisplay.style.display = 'block';
+            alert(`Reservasi berhasil!\nKode: ${code}`);
+        }
+
+        // Init
+        renderMenu();
+        updateCart();
+        document.getElementById('brewCount').textContent = brewCount;
+        if (brewCount >= 10) {
+            document.getElementById('brewBadge').innerHTML = '<span class="badge">🏆 Master Brewer!</span>';
+        }
+    </script>
+
+</body>
+</html>
